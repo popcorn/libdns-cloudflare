@@ -58,6 +58,13 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 		return nil, err
 	}
 
+  if p.DCVDomain != "" {
+    // update every record to use the DCV domain
+    for i, rec := range records {
+      records[i].Name = p.DCVDomain
+    }
+  }
+
 	var created []libdns.Record
 	for _, rec := range records {
 		result, err := p.createRecord(ctx, zoneInfo, rec)
@@ -77,6 +84,13 @@ func (p *Provider) DeleteRecords(ctx context.Context, zone string, records []lib
 	if err != nil {
 		return nil, err
 	}
+
+  if p.DCVDomain != "" {
+    // update every record to use the DCV domain
+    for i, rec := range records {
+      records[i].Name = p.DCVDomain
+    }
+  }
 
 	var recs []libdns.Record
 	for _, rec := range records {
@@ -129,6 +143,13 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 	if err != nil {
 		return nil, err
 	}
+
+  if p.DCVDomain != "" {
+    // update every record to use the DCV domain
+    for i, rec := range records {
+      records[i].Name = p.DCVDomain
+    }
+  }
 
 	var results []libdns.Record
 	for _, rec := range records {
