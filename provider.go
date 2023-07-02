@@ -18,6 +18,7 @@ type Provider struct {
 	// unless you are only using `GetRecords()`, in which case
 	// the second can be changed to Read.
 	APIToken string `json:"api_token,omitempty"`
+	DCVDomain string `json:"dcv_domain,omitempty"`
 
 	zones   map[string]cfZone
 	zonesMu sync.Mutex
